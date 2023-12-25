@@ -26,6 +26,7 @@ const ServiceItem = styled('div')({
   '&:hover': {
     background: 'linear-gradient(rgba(0, 0, 0, 0.6), #0000ff)',
     transform: 'translateY(-10px)',
+    color:"white"
   },
 });
 
@@ -62,18 +63,18 @@ const Services = () => {
             <Icon icon={faCode} />
             <Title>Full Stack Developer</Title>
             <Typography>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga maxime sequi maiores, quia rerum ullam!
+              Worked on the modern tech stack with complete TypeScript integration and using NextJS-13, with experience in Node, Express and NoSQL databases like MongoDB
             </Typography>
-            <ServiceLink href="#">Learn More</ServiceLink>
+            <ServiceLink href="https://github.com/focush67">Learn More</ServiceLink>
           </ServiceItem>
 
           <ServiceItem>
             <Icon icon={faAppStore} />
             <Title>Data Structures and Algorithms</Title>
             <Typography>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga maxime sequi maiores, quia rerum ullam!
+              Solved over 300 problems cross platforms on Leetcode and GeeksForGeeks
             </Typography>
-            <ServiceLink href="#">Learn More</ServiceLink>
+            <ServiceLink href="https://www.linkedin.com/in/sparsh-verma-9250741b1/">Learn More</ServiceLink>
           </ServiceItem>
         </ServicesList>
       </Container>

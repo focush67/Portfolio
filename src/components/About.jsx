@@ -14,6 +14,7 @@ import {
 const AboutContainer = styled("div")(({ theme }) => ({
   paddingTop: theme.spacing(4),
   paddingBottom: theme.spacing(4),
+  marginTop: theme.spacing(5),
 }));
 
 const AboutCol1 = styled("div")(({ theme }) => ({
@@ -116,9 +117,9 @@ const About = () => {
               alignItems:"baseline"
             }}>
               <Typography variant="h6" gutterBottom>
-                BTech:
+                BTech (CSE)
               </Typography>
-              Babu Banarsi Das University, Lucknow
+              Babu Banarsi Das University, Lucknow (2020-2024)
             </li>
             <li style={{
               display:"flex",
@@ -126,9 +127,9 @@ const About = () => {
               alignItems:"baseline"
             }}>
               <Typography variant="h6" gutterBottom>
-                Intermediate:
+                Intermediate (XI + XII)
               </Typography>
-              Lucknow Public School, Lucknow
+              Lucknow Public School, Lucknow (2017-2019)
             </li>
             <li style={{
               display:"flex",
@@ -136,9 +137,9 @@ const About = () => {
               alignItems:"baseline"
             }}>
               <Typography variant="h6" gutterBottom>
-                High School:
+                High School (IX + X)
               </Typography>
-              Lucknow Public School, Lucknow
+              Lucknow Public School, Lucknow (2015-2017)
             </li>
           </ul>
         );
@@ -149,7 +150,7 @@ const About = () => {
   };
 
   return (
-    <AboutContainer id="about">
+    <AboutContainer>
       <Container>
         <Grid container>
           <Grid item xs={12} md={6} component={AboutCol1}>
@@ -157,7 +158,7 @@ const About = () => {
           </Grid>
           <Grid item xs={12} md={6} component={AboutCol2}>
             <Subtitle variant="h4" id="AboutSection">
-            <Typography variant="h4" className="subtitle" style={{
+            <Typography variant="h4" className="subtitle" id="about" style={{
               textAlign:"center"
             }}>
               <h4>About me</h4>

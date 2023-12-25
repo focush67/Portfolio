@@ -1,13 +1,57 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Container, Grid, Typography, TextField, Button, Link } from '@mui/material';
+import cv from '../images/my-cv.pdf';
 
 const Contact = () => {
+  const [formData,setFormData] = useState({
+    name:"",
+    email:"",
+    message:""
+  })
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name] : e.target.value,
+    });
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/query",{
+        method:"POST",
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json();
+      console.log(data);
+      if(response.status === 200){
+        alert("Message received");
+      }
+      else{
+        alert("Couldn't send message, try again");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Error recording query");
+    }
+  }
+
   return (
-    <Container id="contact" sx={{ padding: '50px 1rem' }}>
+    <Container id="contact me" sx={{ padding: '50px 1rem' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} style={{
+          display:"flex",
+          flexDirection:"column",
+          
+          alignItems:"center"
+        }}>
           <Typography variant="h4" component="h2" sx={{ marginBottom: '20px'}}>
-            Contact Me
+            <h4>Contact Me</h4>
           </Typography>
           <Typography component="p" sx={{ marginTop: '30px', display: 'flex', alignItems: 'center' }}>
             <i className="fas fa-paper-plane" sx={{ color: '#262626', marginRight: '15px', fontSize: '25px' }}></i>
@@ -36,7 +80,7 @@ const Contact = () => {
             </Link>
           </div>
           <Link
-            href="my-cv.pdf"
+            href={cv}
             download
             className="btn btn2"
             id="DownloadButton"
@@ -47,7 +91,7 @@ const Contact = () => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <form action="" name="submit-to-google-sheet">
+          <form onSubmit={handleSubmit}>
             <TextField
               name="Name"
               label="Your Name"
@@ -55,6 +99,7 @@ const Contact = () => {
               fullWidth
               required
               sx={{ marginBottom: '15px' }}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               name="email"
@@ -63,6 +108,7 @@ const Contact = () => {
               fullWidth
               required
               sx={{ marginBottom: '15px' }}
+              onChange={(e) => handleChange(e)}
             />
             <TextField
               name="Message"
@@ -72,6 +118,7 @@ const Contact = () => {
               rows={8}
               fullWidth
               sx={{ marginBottom: '20px' }}
+              onChange={(e) => handleChange(e)}
             />
             <div style={{
               display:"flex",
