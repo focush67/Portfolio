@@ -1,45 +1,43 @@
-import React,{useState} from 'react';
-import { Container, Grid, Typography, TextField, Button, Link } from '@mui/material';
+import React from 'react';
+import { Container, Grid, Typography, TextField, Button, Link, Alert } from '@mui/material';
 import cv from '../images/my-cv.pdf';
 
 const Contact = () => {
-  const [formData,setFormData] = useState({
-    name:"",
-    email:"",
-    message:""
-  })
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name] : e.target.value,
-    });
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const formData = {
+    name: e.target.Name.value,
+    email: e.target.Email.value,
+    message: e.target.Message.value,
   }
+  try {
+    const response = await fetch("http://localhost:3000/query", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/query",{
-        method:"POST",
-        headers:{
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      })
+    const data = await response.json();
 
-      const data = await response.json();
-      console.log(data);
-      if(response.status === 200){
-        alert("Message received");
-      }
-      else{
-        alert("Couldn't send message, try again");
-      }
-    } catch (error) {
-      console.log(error);
+    if(data.status === 200){
+      alert("Message was recorded");
+    }
+
+    else{
       alert("Error recording query");
     }
+  } catch (error) {
+    console.log(error);
   }
+  finally{
+    e.target.reset();
+  }
+};
+// ...
+
 
   return (
     <Container id="contact me" sx={{ padding: '50px 1rem' }}>
@@ -99,16 +97,16 @@ const Contact = () => {
               fullWidth
               required
               sx={{ marginBottom: '15px' }}
-              onChange={(e) => handleChange(e)}
+              
             />
             <TextField
-              name="email"
+              name="Email"
               label="Your Email"
               variant="outlined"
               fullWidth
               required
               sx={{ marginBottom: '15px' }}
-              onChange={(e) => handleChange(e)}
+              
             />
             <TextField
               name="Message"
@@ -118,7 +116,7 @@ const Contact = () => {
               rows={8}
               fullWidth
               sx={{ marginBottom: '20px' }}
-              onChange={(e) => handleChange(e)}
+              
             />
             <div style={{
               display:"flex",
@@ -136,7 +134,6 @@ const Contact = () => {
             </div>
             
           </form>
-
           <Typography id="msg"></Typography>
         </Grid>
       </Grid>

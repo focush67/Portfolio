@@ -16,9 +16,9 @@ app.post("/query", async(request, response) => {
     const formData = await request.body;
     console.log(request.body);
     const newQuery = await QuerySchema.create({
-      name: formData.Name,
+      name: formData.name,
       email: formData.email,
-      message: formData.Message,
+      message: formData.message,
     });
 
     response.json({
